@@ -1,6 +1,8 @@
-// Exercise 2: Fix the Bug
+// Exercise 1: Equality Detective
 
-const num1 = Number(prompt("First number:")); // convert to number
-const num2 = Number(prompt("Second number:")); // convert to number
-const sum = num1 + num2;
-console.log(`Sum: ${sum}`);
+console.log(5 === "5");  
+console.log(5 == "5");    
+console.log(true === 1); 
+console.log(true == 1);  
+console.log(false === 0); 
+console.log(false == 0);  
