@@ -1,13 +1,7 @@
-//Exercise 1: Personal Introduction
+//Exercise 2: Math in Templates
 
-// Create variables for:
-const myName = "Len"; // Your name
-const myAge = 20; // Your age
-const myJob = "IT Student"; // Your job/student status
 const currentYear = 2025;
+const myAge = 20;
 
-const me = "I'm " + myName + ", a " + myAge + " year old " + myJob + "!"
-console.log(me)
-// Use template literals to create:
-// "Hi, I'm [name], a [age] year old [job]!"
-// Log it to the console
+const result = `Born in ${currentYear - myAge}, 10*5 = ${10 * 5}, Adult: ${myAge >= 18}`;
+console.log(result);
