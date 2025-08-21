@@ -1,5 +1,32 @@
-// Coding Challenge #1 - BMI Calculator
+// JavaScript Fundamentals - Hour 2
 
+// Exercise: Score Calculator
+let score = 100;
+console.log("Score:", score)
+score += 50
+console.log("After score += 50:",score)
+score *= 2
+console.log("After score *= 2:",score)
+score -= 25
+console.log("After score -= 25:",score)
+score ++;
+console.log("After score ++:",score)
+score ++;
+console.log("After score ++:",score)
+
+///Exercise: Age Verification
+const myAge = 20;
+
+const compare = myAge >= 18;
+console.log("Is 18 less than my age?:", compare)
+
+const check = 100 >= 90;
+console.log("Is 100 greater than 90?:", check)
+
+console.log("Complex comparison:");
+console.log(compare > check); 
+
+// Coding Challenge #1 - BMI Calculator
 // Test Data 1
 const massMark = 78;
 const heightMark = 1.69;
