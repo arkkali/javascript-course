@@ -1,11 +1,11 @@
-// Exercise 2: Fix the Login System
+// Exercise 1: Club Entry System
 
-const username = prompt("Username:");
-const password = prompt("Password:");
+const age = 15;
+const hasID = false; 
+const isVIP = true; 
 
-// Fix: use strict equality (===)
-if (username === "admin" && password === "1234") {
-  console.log("Welcome admin!");
+if ((age >= 21 && hasID) || isVIP) {
+  console.log("Welcome to the club!");
 } else {
-  console.log("Access denied");
+  console.log("Sorry, you cannot enter");
 }
