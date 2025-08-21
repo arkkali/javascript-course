@@ -1,9 +1,10 @@
 // JavaScript Fundamentals - Part 1
 // We'll write our code here!
 
-console.log("1. Create a let variable called 'score' with value 100");
-console.log("2. Log it to the console");
+console.log("4. Log it again");
+console.log("5. Try the same with const - what happens?");
+console.log("   It shows uncaught typeError");
 
-let score = 100
+const score = "100"
 score = 150
 console.log(score);
