@@ -1,14 +1,10 @@
-// Exercise 1: Grade Calculator
-const testScore = 78; // Change this to test different scores
+// Exercise 2: Age Verification
+const userAge = 20; // Change this to test
 
-if (testScore >= 90) {
-  console.log("Excellent! Grade A");
-} else if (testScore >= 80) {
-  console.log("Good job! Grade B");
-} else if (testScore >= 70) {
-  console.log("Not bad! Grade C");
-} else if (testScore >= 60) {
-  console.log("You passed! Grade D");
+if (userAge >= 18) {
+  console.log("Welcome! You can access all content");
+} else if (userAge >= 13) {
+  console.log("Welcome! Restricted content only");
 } else {
-  console.log("You failed! Study harder");
+  console.log("Sorry, you're too young");
 }
