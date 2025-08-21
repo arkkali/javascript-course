@@ -1,18 +1,12 @@
-// Exercise: Score Calculator
-let score = 100;
-console.log("Score:", score)
+///Exercise: Age Verification
 
-score += 50
-console.log("After score += 50:",score)
+const myAge = 20;
 
-score *= 2
-console.log("After score *= 2:",score)
+const compare = myAge >= 18;
+console.log("Is 18 less than my age?:", compare)
 
-score -= 25
-console.log("After score -= 25:",score)
+const check = 100 >= 90;
+console.log("Is 100 greater than 90?:", check)
 
-score ++;
-console.log("After score ++:",score)
-
-score ++;
-console.log("After score ++:",score)
+console.log("Complex comparison:");
+console.log(compare > check); 
