@@ -1,10 +1,9 @@
-//Exercise 1: Status Messages
-// 1. Login status
-const isLoggedIn = true;
-let welcomeMessage = isLoggedIn ? "Welcome back!" : "Please sign in";
-console.log(welcomeMessage);
+// Coding Challenge #4
 
-// 2. Price with discount
-const isPremium = false;
-let price = isPremium ? 100 * 0.8 : 100;
-console.log(price);
+const bill = 275; // Test with 275, 40, and 430
+
+// Step 1: Create the tip calculation using ternary operator
+const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+
+// Step 2: Create beautiful output with template literal
+console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}`);
