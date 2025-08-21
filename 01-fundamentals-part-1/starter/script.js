@@ -1,10 +1,13 @@
-// Exercise 2: Age Verification
-const userAge = 20; // Change this to test
+// Exercise: Truth Detector
+const values = [0, 1, "", "hello", undefined, null, NaN, {}, []];
 
-if (userAge >= 18) {
-  console.log("Welcome! You can access all content");
-} else if (userAge >= 13) {
-  console.log("Welcome! Restricted content only");
-} else {
-  console.log("Sorry, you're too young");
+for (let val of values) {
+  console.log("Value:", val);
+  console.log("Boolean:", Boolean(val));
+  if (val) {
+    console.log("Truthy!");
+  } else {
+    console.log("Falsy!");
+  }
+  console.log("-----------------");
 }
