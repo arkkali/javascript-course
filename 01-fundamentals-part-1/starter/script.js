@@ -1,8 +1,11 @@
-// Exercise 1: Equality Detective
+// Exercise 2: Fix the Login System
 
-console.log(5 === "5");  
-console.log(5 == "5");    
-console.log(true === 1); 
-console.log(true == 1);  
-console.log(false === 0); 
-console.log(false == 0);  
+const username = prompt("Username:");
+const password = prompt("Password:");
+
+// Fix: use strict equality (===)
+if (username === "admin" && password === "1234") {
+  console.log("Welcome admin!");
+} else {
+  console.log("Access denied");
+}
