@@ -1,11 +1,15 @@
-// Exercise 1: Club Entry System
+// Exercise 2: Weather Advisor
 
-const age = 15;
-const hasID = false; 
-const isVIP = true; 
+const temperature = 50; // Celsius
+const isRaining = false;
+const isWindy = true;
 
-if ((age >= 21 && hasID) || isVIP) {
-  console.log("Welcome to the club!");
+if (temperature >= 20 && temperature <= 30 && !isRaining && !isWindy) {
+  console.log("Perfect day!");
+} else if (temperature >= 15 && temperature <= 35 && !isRaining) {
+  console.log("Good day!");
 } else {
-  console.log("Sorry, you cannot enter");
+  console.log("Stay inside!");
 }
+
+
