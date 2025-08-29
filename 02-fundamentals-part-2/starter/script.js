@@ -1,27 +1,56 @@
-//Coding Challenge #1: Function Calculator
-// Function to calculate average of 3 scores
-function calcAverage(score1, score2, score3) {
-  return (score1 + score2 + score3) / 3;
-}
+// Coding Challenge #2 - Student Grade Manager
 
-// Function to check winner
-function checkWinner(avgDolphins, avgKoalas) {
-  if (avgDolphins >= 2 * avgKoalas) {
-    return `Dolphins win! (${avgDolphins} vs. ${avgKoalas})`;
-  } else if (avgKoalas >= 2 * avgDolphins) {
-    return `Koalas win! (${avgKoalas} vs. ${avgDolphins})`;
-  } else {
-    return `No team wins. (${avgDolphins} vs. ${avgKoalas})`;
+const grades = [78, 85, 92, 67, 88, 95, 73, 82];
+
+// Function to calculate average
+function calculateAverage(grades) {
+  let total = 0;
+  for (let i = 0; i < grades.length; i++) {
+    total += grades[i];
   }
+  return total / grades.length;
 }
 
-// Test Data 1
-let scoreDolphins = calcAverage(44, 23, 71);
-let scoreKoalas = calcAverage(65, 54, 49);
-console.log(checkWinner(scoreDolphins, scoreKoalas));
+// Function to find highest grade
+function findHighestGrade(grades) {
+  let highest = grades[0];
+  for (let i = 1; i < grades.length; i++) {
+    if (grades[i] > highest) {
+      highest = grades[i];
+    }
+  }
+  return highest;
+}
 
-// Test Data 2
-scoreDolphins = calcAverage(85, 54, 41);
-scoreKoalas = calcAverage(23, 34, 27);
-console.log(checkWinner(scoreDolphins, scoreKoalas));
+// Function to find lowest grade
+function findLowestGrade(grades) {
+  let lowest = grades[0];
+  for (let i = 1; i < grades.length; i++) {
+    if (grades[i] < lowest) {
+      lowest = grades[i];
+    }
+  }
+  return lowest;
+}
+
+// Function to count passing students
+function countPassing(grades, passingGrade) {
+  let count = 0;
+  grades.forEach((grade) => {
+    if (grade >= passingGrade) count++;
+  });
+  return count;
+}
+
+// Generate complete report
+const average = calculateAverage(grades);
+const highest = findHighestGrade(grades);
+const lowest = findLowestGrade(grades);
+const passing = countPassing(grades, 70);
+
+console.log("=== GRADE REPORT ===");
+console.log(`Average: ${average.toFixed(2)}`);
+console.log(`Highest: ${highest}`);
+console.log(`Lowest: ${lowest}`);
+console.log(`Passing students: ${passing} out of ${grades.length}`);
 
