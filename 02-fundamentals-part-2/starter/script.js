@@ -1,147 +1,135 @@
-// JavaScript Fundamentals Part 2 - Hour 1
-//Coding Challenge #1: Function Calculator
-// Function to calculate average of 3 scores
-function calcAverage(score1, score2, score3) {
-  return (score1 + score2 + score3) / 3;
-}
+//JavaScript Fundamentals Part 2 - Hour 4
+// Interactive Score Tracker - script.js
 
-// Function to check winner
-function checkWinner(avgDolphins, avgKoalas) {
-  if (avgDolphins >= 2 * avgKoalas) {
-    return `Dolphins win! (${avgDolphins} vs. ${avgKoalas})`;
-  } else if (avgKoalas >= 2 * avgDolphins) {
-    return `Koalas win! (${avgKoalas} vs. ${avgDolphins})`;
-  } else {
-    return `No team wins. (${avgDolphins} vs. ${avgKoalas})`;
-  }
-}
+const score1El = document.getElementById("score-1");
+const score2El = document.getElementById("score-2");
 
-// Test Data 1
-let scoreDolphins = calcAverage(44, 23, 71);
-let scoreKoalas = calcAverage(65, 54, 49);
-console.log(checkWinner(scoreDolphins, scoreKoalas));
+const addButtons = document.querySelectorAll(".btn-add");
+const resetBtn = document.getElementById("btn-reset");
 
-// Test Data 2
-scoreDolphins = calcAverage(85, 54, 41);
-scoreKoalas = calcAverage(23, 34, 27);
-console.log(checkWinner(scoreDolphins, scoreKoalas));
+const winningInput = document.getElementById("winning-score");
+const targetEl = document.querySelector(".target");
+
+const statusEl = document.querySelector(".status");
+const winnerBanner = document.querySelector(".winner");
+const winnerNameEl = document.querySelector(".winner-name");
+
+const player1Card = document.querySelector(".player-1");
+const player2Card = document.querySelector(".player-2");
 
 
-
-
-// JavaScript Fundamentals Part 2 - Hour 2
-// Coding Challenge #2 - Student Grade Manager
-const grades = [78, 85, 92, 67, 88, 95, 73, 82];
-
-// Function to calculate average
-function calculateAverage(grades) {
-  let total = 0;
-  for (let i = 0; i < grades.length; i++) {
-    total += grades[i];
-  }
-  return total / grades.length;
-}
-
-// Function to find highest grade
-function findHighestGrade(grades) {
-  let highest = grades[0];
-  for (let i = 1; i < grades.length; i++) {
-    if (grades[i] > highest) {
-      highest = grades[i];
-    }
-  }
-  return highest;
-}
-// Function to find lowest grade
-function findLowestGrade(grades) {
-  let lowest = grades[0];
-  for (let i = 1; i < grades.length; i++) {
-    if (grades[i] < lowest) {
-      lowest = grades[i];
-    }
-  }
-  return lowest;
-}
-
-// Function to count passing students
-function countPassing(grades, passingGrade) {
-  let count = 0;
-  grades.forEach((grade) => {
-    if (grade >= passingGrade) count++;
-  });
-  return count;
-}
-// Generate complete report
-const average = calculateAverage(grades);
-const highest = findHighestGrade(grades);
-const lowest = findLowestGrade(grades);
-const passing = countPassing(grades, 70);
-console.log("=== GRADE REPORT ===");
-console.log(`Average: ${average.toFixed(2)}`);
-console.log(`Highest: ${highest}`);
-console.log(`Lowest: ${lowest}`);
-console.log(`Passing students: ${passing} out of ${grades.length}`);
-
-
-
-
-// JavaScript Fundamentals Part 2 - Hour 3
-// Coding Challenge #3 - User Profile System
-const user = {
-  firstName: "Sarah",
-  lastName: "Johnson",
-  birthYear: 1995,
-  location: "New York",
-  interests: ["photography", "travel", "coding"],
-  friends: [
-    { name: "Michael", status: "active" },
-    { name: "Emma", status: "inactive" },
-    { name: "David", status: "active" },
-  ],
-  isActive: true,
-
-  // Calculate age method
-  calcAge: function () {
-    const currentYear = new Date().getFullYear();
-    this.age = currentYear - this.birthYear; // store age in object
-    return this.age;
-  },
-
-  // Add friend method
-  addFriend: function (name, status = "active") {
-    this.friends.push({ name, status });
-    return this.friends.length; // return new length
-  },
-
-  // Get active friends count
-  getActiveFriends: function () {
-    return this.friends.filter((friend) => friend.status === "active").length;
-  },
-
-  // Toggle active status
-  toggleStatus: function () {
-    this.isActive = !this.isActive;
-    return this.isActive;
-  },
-
-  // Generate profile summary
-  getSummary: function () {
-    this.calcAge(); // ensure age is updated
-    const activeFriends = this.getActiveFriends();
-    return `${this.firstName} ${this.lastName} is a ${this.age}-year-old living in ${
-      this.location
-    }. 
-Status: ${this.isActive ? "Active" : "Inactive"}.
-She has ${this.friends.length} friends (${activeFriends} active). 
-Interests: ${this.interests.join(", ")}.`;
-  },
+const game = {
+  scores: { 1: 0, 2: 0 },
+  target: Number(winningInput.value) || 5,
+  isOver: false,
 };
 
-// Test your user profile system
-console.log(user.getSummary());
 
-user.addFriend("Alex", "active");
-user.toggleStatus();
+function renderScores() {
+  score1El.textContent = game.scores[1];
+  score2El.textContent = game.scores[2];
+}
 
-console.log(`\nAfter updates:`);
-console.log(user.getSummary());
+function setButtonsEnabled(enabled) {
+  addButtons.forEach((btn) => (btn.disabled = !enabled));
+}
+
+function celebrate(winnerPlayer) {
+  const loserPlayer = winnerPlayer === 1 ? 2 : 1;
+
+  // Show banner
+  winnerNameEl.textContent = `Player ${winnerPlayer}`;
+  winnerBanner.classList.remove("hidden");
+
+  // Style cards
+  (winnerPlayer === 1 ? player1Card : player2Card).classList.add("winner");
+  (loserPlayer === 1 ? player1Card : player2Card).classList.add("loser");
+
+  // Update status text
+  statusEl.textContent = `Game over — Player ${winnerPlayer} reached ${game.target}!`;
+}
+
+function clearCelebration() {
+  winnerBanner.classList.add("hidden");
+  player1Card.classList.remove("winner", "loser");
+  player2Card.classList.remove("winner", "loser");
+}
+
+function checkForWinner() {
+  for (const p of [1, 2]) {
+    if (game.scores[p] >= game.target) {
+      game.isOver = true;
+      setButtonsEnabled(false);
+      celebrate(p);
+      return true;
+    }
+  }
+  return false;
+}
+
+function incrementScore(player) {
+  if (game.isOver) return;
+  game.scores[player]++;
+  renderScores();
+  checkForWinner();
+}
+
+function resetGame() {
+  game.scores[1] = 0;
+  game.scores[2] = 0;
+  game.isOver = false;
+
+  renderScores();
+  clearCelebration();
+  setButtonsEnabled(true);
+
+  statusEl.innerHTML = `First to <span class="target">${game.target}</span> wins!`;
+  targetElRefetch();
+}
+
+function targetElRefetch() {
+  const newTarget = document.querySelector(".target");
+  if (newTarget) {
+  }
+}
+
+// Add point buttons
+addButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const player = Number(btn.dataset.player);
+    incrementScore(player);
+  });
+});
+
+// Reset button
+resetBtn.addEventListener("click", resetGame);
+
+// Winning score input 
+winningInput.addEventListener("change", () => {
+  let val = Math.floor(Number(winningInput.value));
+  const min = Number(winningInput.min) || 1;
+  const max = Number(winningInput.max) || 20;
+
+  if (!Number.isFinite(val)) val = game.target;
+  val = Math.max(min, Math.min(max, val));
+
+  winningInput.value = String(val);
+  game.target = val;
+
+  // Update the on-screen target and reset the game to apply new rule
+  targetEl.textContent = String(val);
+  resetGame();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "1") incrementScore(1);
+  else if (e.key === "2") incrementScore(2);
+  else if (e.key.toLowerCase() === "r") resetGame();
+});
+
+targetEl.textContent = String(game.target);
+renderScores();
+setButtonsEnabled(true);
+clearCelebration();
+statusEl.innerHTML = `First to <span class="target">${game.target}</span> wins!`;
+
