@@ -12,22 +12,42 @@ const btnCloseModalEl = document.querySelector('.close-modal');
 //open modal
 const btnsOpenModalEl = document.querySelectorAll('.show-modal');
 
-
+let lastFocusButton = null;
 const openModal = function () {
     //remove hidden classname in modal
     modalEl.classList.remove('hidden');
 
     //remove the hidden keyword classname in overlay
     overlayEl.classList.remove('hidden');
+
+    modalEl.focus();
+    lastFocusButton = document.activeElement;
 };
+
 
 const closeModal = function () {
     modalEl.classList.add('hidden');
 
     overlayEl.classList.add('hidden');
-}
+    if(lastFocusButton) {
+        lastFocusButton.focus();
+    }
+};
 
 btnsOpenModalEl.forEach(btn => btn.addEventListener('click', openModal));
 btnCloseModalEl.addEventListener('click', closeModal);
 overlayEl.addEventListener('click', closeModal);
 
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && !modalEl.classList.contains('hidden')); {
+        closeModal();
+    }
+}); 
+
+modalEl.setAttribute('role', 'dialog');
+modalEl.setAttribute('aria-model', 'true');
+
+btnCloseModalEl.setAttribute('aria-label', 'Close-modal');
+
+
+ 
