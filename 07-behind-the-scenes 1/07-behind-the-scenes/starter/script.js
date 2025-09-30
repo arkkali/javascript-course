@@ -1,99 +1,96 @@
 'use strict';
-// const obj = {
-//   name: 'Object',
-
-//   regularMethod: function () {
-//     console.log('Regular:', this.name);
+// const functionTypes = {
+//   regularFunction: function () {
+//     console.log('Arguemtns length', arguments.length);
+//     console.log(`First argument:`, arguments[0]);
 //   },
 
-
-
-//   arrowMethod: () => {
-//     console.log('Arrow:', this.name);
+//   arrowFunction: () => {
+//     console.log(arguments);
+//     console.log('Arrow function called');
 //   },
-// };
 
-// obj.regularMethod();
-// obj.arrowMethod();
-
-// // Before running, predict the output:
-// const quiz = {
-//   name: 'Quiz Object',
-//   regularMethod() {
-//     console.log('Regular:', this.name);
-//   },
-//   arrowMethod: () => {
-//     console.log('Arrow:', this.name);
+//   modernFunction: (...args) => {
+//     console.log('Args length:', args.length);
+//     console.log('First arg', args[0]);
 //   },
 // };
 
-// quiz.regularMethod(); // Predict: ?
-// quiz.arrowMethod(); // Predict: ?
+// functionTypes.regularFunction('Hello', 'world');
+// // functionTypes.arrowFunction('test');
+// functionTypes.modernFunction('modern', 'approach');
 
-// const timer = {
-//   name: 'Timer',
-//   // using the old ways
-//   start: function () {
-//     console.log(`${this.name} starting...`);
+// // Primitive
+// let age = 30;
 
-//     const self = this;
+// // we copy the primitive, making independent copy
+// let oldAge = age;
 
-//     setTimeout(function () {
-//       console.log(`${self.name} finsihed`);
-//     }, 1000);
-//   },
-//   // Using arrow function
-//   startModern: function () {
-//     console.log(`${this.name} starting modern...`);
+// age = 31;
 
-//     setTimeout(() => {
-//       console.log(`${this.name} finished modern`);
-//     });
-//   },
-// };
+// console.log('age', age);
 
-// timer.start();
-// timer.startModern();
+// console.log('oldAge:', oldAge);
 
-// const user = {
-//   name: 'Alice',
-//   hobbies: ['reading', 'coding', 'gaming'],
+// // OBJECT HEAP
+// //objects are stored in heap, variables hold references
+// const me = { name: 'Jonas', age: 30 };
 
-//   // BROKEN: arrow function loses `this`
-//   printHobbiesBad: () => {
-//     this.hobbies.forEach(hobby => {
-//       console.log(`${this.name} likes ${hobby}`); // this.name is undefined!
-//     });
-//   },
+// const friend = me;
 
-//   // FIXED: regular function preserves `this`
-//   printHobbiesGood() {
-//     this.hobbies.forEach(hobby => {
-//       console.log(`${this.name} likes ${hobby}`); // this.name works!
-//     });
-//   },
-// };
+// friend.age = 27;
 
-// // user.printHobbiesBad();
-// user.printHobbiesGood();
+// console.log('me', me);
+// console.log('Friend', friend);
 
-const functionTypes = {
-  regularFunction: function () {
-    console.log('Arguemtns length', arguments.length);
-    console.log(`First argument:`, arguments[0]);
-  },
+function changeAge(person, newAge) {
+  person.age = newAge;
+  return person;
+}
 
-  arrowFunction: () => {
-    console.log(arguments);
-    console.log('Arrow function called');
-  },
+const originalPerson = { name: 'Sarah', age: 25 };
 
-  modernFunction: (...args) => {
-    console.log('Args length:', args.length);
-    console.log('First arg', args[0]);
-  },
+const updatedPerson = changeAge(originalPerson, 30);
+
+console.log('Same object?:', originalPerson === updatedPerson);
+
+// SOLUTION TO MAKE  A COPY
+const original = {
+  name: 'Alice',
+  age: 28,
+  hobbies: ['reading', 'codings'],
 };
 
-functionTypes.regularFunction('Hello', 'world');
-// functionTypes.arrowFunction('test');
-functionTypes.modernFunction('modern', 'approach');
+const shallowCopy = { ...original };
+
+shallowCopy.name = 'Bob';
+
+console.log('original name:', original.name);
+console.log('Shallow name:', shallowCopy.name);
+
+shallowCopy.hobbies.push('gaming');
+
+console.log('original hobbies:', original.hobbies);
+console.log('Shallow hobbies:', shallowCopy.hobbies);
+
+/// Deep copy
+const deepOriginal = {
+  name: 'Charlie',
+  age: 32,
+  address: { city: 'Paris', country: 'France' },
+  hobbies: ['travel', 'photography'],
+};
+const deepCopy = structuredClone(deepOriginal);
+
+deepCopy.address.city = 'London';
+deepCopy.hobbies.push('cooking');
+deepCopy.name = 'Lex';
+
+console.log('Original address', deepOriginal.address);
+console.log('Copy address:', deepCopy.address);
+
+console.log('original hobbies:', deepOriginal.hobbies);
+console.log('Copy hobbies:', deepCopy.hobbies);
+
+console.log('original name:', deepOriginal.name);
+console.log('copy name:', deepCopy.name);
